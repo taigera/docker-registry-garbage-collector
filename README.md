@@ -61,3 +61,4 @@ Fixes and improvements are submitted as pull requests via Github.
 
 ## Related projects
  * [docker-registry-tool](https://github.com/taigers/docker-registry-tool)
+ * [docker-registry-manager](https://github.com/taigers/docker-registry-manager)
