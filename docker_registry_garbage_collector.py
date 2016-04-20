@@ -2,6 +2,7 @@
 
 import json
 import os
+import sys
 from io import BytesIO
 from subprocess import call
 from ConfigParser import SafeConfigParser
@@ -31,7 +32,14 @@ def check_configuration():
     :return: true if the settings are OK, otherwise returns false.
     """
     parser = SafeConfigParser()
-    parser.read('docker_registry_garbage_collector.conf')
+    # determine if application is a script file or frozen exe
+    if getattr(sys, 'frozen', False):
+        application_path = os.path.dirname(sys.executable)
+    elif __file__:
+        application_path = os.path.dirname(__file__)
+
+    config_path = os.path.join(application_path, 'docker_registry_garbage_collector.conf')
+    parser.read(config_path)
     registry_directory = parser.get('docker_registry_garbage_collector', 'RegistryDirectory')
     registry_container_id = parser.get('docker_registry_garbage_collector', 'RegistryContainerId')
     registry_address = parser.get('docker_registry_garbage_collector', 'RegistryAddress')
@@ -68,7 +76,14 @@ def check_configuration():
 def get_images_name():
     """Get all images from the Docker Registry, returning their names as a list."""
     parser = SafeConfigParser()
-    parser.read('docker_registry_garbage_collector.conf')
+    # determine if application is a script file or frozen exe
+    if getattr(sys, 'frozen', False):
+        application_path = os.path.dirname(sys.executable)
+    elif __file__:
+        application_path = os.path.dirname(__file__)
+
+    config_path = os.path.join(application_path, 'docker_registry_garbage_collector.conf')
+    parser.read(config_path)
     registry_address = parser.get('docker_registry_garbage_collector', 'RegistryAddress')
     registry_port = parser.get('docker_registry_garbage_collector', 'RegistryPort')
     registry_username = parser.get('docker_registry_garbage_collector', 'RegistryUsername')
@@ -92,7 +107,14 @@ def get_image_tags(image):
     then return None
     :param image: input image stored in the Registry"""
     parser = SafeConfigParser()
-    parser.read('docker_registry_garbage_collector.conf')
+    # determine if application is a script file or frozen exe
+    if getattr(sys, 'frozen', False):
+        application_path = os.path.dirname(sys.executable)
+    elif __file__:
+        application_path = os.path.dirname(__file__)
+
+    config_path = os.path.join(application_path, 'docker_registry_garbage_collector.conf')
+    parser.read(config_path)
     registry_address = parser.get('docker_registry_garbage_collector', 'RegistryAddress')
     registry_port = parser.get('docker_registry_garbage_collector', 'RegistryPort')
     registry_username = parser.get('docker_registry_garbage_collector', 'RegistryUsername')
@@ -114,7 +136,14 @@ def get_image_tags(image):
 def shutdown_registry():
     """This function stops the Docker Registry container"""
     parser = SafeConfigParser()
-    parser.read('docker_registry_garbage_collector.conf')
+    # determine if application is a script file or frozen exe
+    if getattr(sys, 'frozen', False):
+        application_path = os.path.dirname(sys.executable)
+    elif __file__:
+        application_path = os.path.dirname(__file__)
+
+    config_path = os.path.join(application_path, 'docker_registry_garbage_collector.conf')
+    parser.read(config_path)
     registry_container_id = parser.get('docker_registry_garbage_collector', 'RegistryContainerId')
     nginx_container_id = parser.get('docker_registry_garbage_collector', 'NginxContainerId')
     call(['docker', 'stop', registry_container_id])
@@ -125,7 +154,14 @@ def shutdown_registry():
 def start_registry():
     """This function starts the Docker Registry container"""
     parser = SafeConfigParser()
-    parser.read('docker_registry_garbage_collector.conf')
+    # determine if application is a script file or frozen exe
+    if getattr(sys, 'frozen', False):
+        application_path = os.path.dirname(sys.executable)
+    elif __file__:
+        application_path = os.path.dirname(__file__)
+
+    config_path = os.path.join(application_path, 'docker_registry_garbage_collector.conf')
+    parser.read(config_path)
     registry_container_id = parser.get('docker_registry_garbage_collector', 'RegistryContainerId')
     nginx_container_id = parser.get('docker_registry_garbage_collector', 'NginxContainerId')
     call(['docker', 'start', registry_container_id])
@@ -139,7 +175,14 @@ def delete_image(image):
     delete_docker_registry_image and https://stedolan.github.io/jq/download/ for installing the required dependency)
     :param image: input image stored in the Registry"""
     parser = SafeConfigParser()
-    parser.read('docker_registry_garbage_collector.conf')
+    # determine if application is a script file or frozen exe
+    if getattr(sys, 'frozen', False):
+        application_path = os.path.dirname(sys.executable)
+    elif __file__:
+        application_path = os.path.dirname(__file__)
+
+    config_path = os.path.join(application_path, 'docker_registry_garbage_collector.conf')
+    parser.read(config_path)
     registry_directory = parser.get('docker_registry_garbage_collector', 'RegistryDirectory')
     os.environ["REGISTRY_DATA_DIR"] = registry_directory
     call(['delete_docker_registry_image', '--force', '--image', image])
