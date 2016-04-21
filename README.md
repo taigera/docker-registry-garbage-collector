@@ -34,18 +34,19 @@ The script configuration is made in the `docker_registry_garbage_collector.conf`
 ## Run
 To run this script, you must execute the binary file using an administrator account with full privilegies (root). Otherwise, you can run it directly from the source file, executing this command using an administrator account with full privilegies (root) `python docker_registry_garbage_collector.py`. The script will delete all images that does not have any tag or reference.
 
-You can make a cronjob in GNU/Linux like this one to repeat the execution of the Garbage Collector at certain hours. Execute the command `sudo crontab -e` and add the following (make sure to change it according to the path where you stored the script):
+You can make a cronjob in GNU/Linux like this one to repeat the execution of the Garbage Collector at certain hours. Make sure that the binary has executable permissions by issuing `chmod +x docker_registry_garbage_collector`, execute the command `sudo crontab -e` and add the following (make sure to change it according to the path where you stored the script):
 ```
 SHELL=/bin/sh
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 
 # m h  dom mon dow   command
-30 9 * * * /usr/bin/python docker_registry_garbage_collector.py
-30 14 * * * /usr/bin/python docker_registry_garbage_collector.py
-30 19 * * * /usr/bin/python docker_registry_garbage_collector.py
-30 0 * * * /usr/bin/python docker_registry_garbage_collector.py
-30 5 * * * /usr/bin/python docker_registry_garbage_collector.py
+30 9 * * * /usr/bin/docker_registry_garbage_collector
+30 14 * * * /usr/bin/docker_registry_garbage_collector
+30 19 * * * /usr/bin/docker_registry_garbage_collector
+30 0 * * * /usr/bin/docker_registry_garbage_collector
+30 5 * * * /usr/bin/docker_registry_garbage_collector
 ```
+
 
 ## Users
  * The company [Taiger](http://www.taiger.com) uses this tool in their development processes and infrastructures.
