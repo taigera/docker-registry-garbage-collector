@@ -51,6 +51,9 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 ## Users
  * The company [Taiger](http://www.taiger.com) uses this tool in their development processes and infrastructures.
 
+## Greetings
+Performed as part of the LPS-BIGGER project, funded by the [Centre for the Development of Industrial Technology (CDTI)](http://www.cienlpsbigger.es)
+![CDTI](http://www.cienlpsbigger.es/images/cdti.png)
 
 ## Reporting issues
 Issues can be reported via the [Github issue tracker](https://github.com/taigers/docker-registry-garbage-collector/issues).
